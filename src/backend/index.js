@@ -1,9 +1,10 @@
-import "@babel/polyfill";
+// import "@babel/polyfill";
 import { resolve } from "url";
 import { rejects } from "assert";
 
 /* eslint-disable no-console */
-// import _ from "lodash";
+import {pick} from "lodash";
+// const _ = import(/* webpackChunkName: "my-chunk-name" */ "lodash");
 import c from "./c";
 // // const a = require("./a");
 // // a.introduce();

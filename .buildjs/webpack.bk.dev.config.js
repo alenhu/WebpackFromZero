@@ -11,7 +11,7 @@ module.exports = {
     ],
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'bundle.js'
+        filename: '[name].bundle.js'
     },
     mode: 'development',
     watch: true,

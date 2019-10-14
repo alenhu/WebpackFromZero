@@ -10,7 +10,8 @@ module.exports = {
     ],
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'bundle.js'
+        filename: '[name].bundle.js'
+        // chunkFilename: '[id].[name].[chunkhash].js'
     },
     mode: 'production',
     resolve: {
@@ -50,11 +51,17 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env']
+            ,
+            plugins: [
+              ["dynamic-import-node"]
+            ]
           }
         }
       }
 
     ]
+  },
+  optimization: {
   },
     plugins: [
         // 构建优化插件
