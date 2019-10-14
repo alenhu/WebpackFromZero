@@ -16,6 +16,11 @@
         "regenerator": true,
         "useESModules": false
       }],
-      ["dynamic-import-node"]
+      ["transform-imports", {
+        "lodash": {
+          "transform": "lodash/${member}",
+          "preventFullImport": true
+        }
+      }]
   ]
 }

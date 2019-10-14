@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const backendPath = path.resolve(__dirname,'../src/backend')
 console.log(path.resolve(__dirname, 'build'), backendPath)
 console.log('path.resolve(src)', path.resolve('src'))
@@ -62,6 +63,11 @@ module.exports = {
     ]
   },
   optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        test: /\.js(\?.*)?$/i,
+      }),
+    ]
   },
     plugins: [
         // 构建优化插件
