@@ -11,6 +11,7 @@ module.exports = {
     ],
     output: {
         path: path.resolve(__dirname, 'build'),
+        libraryTarget: "commonjs2",
         filename: '[name].bundle.js'
         // chunkFilename: '[id].[name].[chunkhash].js'
     },
@@ -27,7 +28,17 @@ module.exports = {
         'src': path.resolve(__dirname, './src')
       }
     },
-
+    node: {
+      console: 'mock',
+      global: true,
+      process: true,
+      __filename: 'mock',
+      __dirname: 'mock',
+      Buffer: true,
+      setImmediate: true
+  
+      // See "Other node core libraries" for additional options.
+    },
     module: {
       rules: [
         {
@@ -66,6 +77,15 @@ module.exports = {
     minimizer: [
       new UglifyJsPlugin({
         test: /\.js(\?.*)?$/i,
+        uglifyOptions: {
+          output: {
+            comments: false,
+          },
+          warnings: false,
+          compress: {},
+          mangle: true
+        },
+        
       }),
     ]
   },
