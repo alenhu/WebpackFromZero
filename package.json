@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node .buildjs/build.js",
+    "dev": "node .buildjs/build.js dev",
     "build2": "webpack --progress --profile --colors --config .buildjs/webpack.bk.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -30,6 +31,7 @@
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^3.0.2",
     "eslint-plugin-html": "^6.0.0",
+    "nodemon-webpack-plugin": "^4.1.1",
     "webpack": "^4.41.1",
     "webpack-cli": "^3.3.9"
   }

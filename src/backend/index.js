@@ -4,13 +4,13 @@ import { rejects } from "assert";
 
 /* eslint-disable no-console */
 // import _ from "lodash";
-// import c from "./c";
+import c from "./c";
 // // const a = require("./a");
 // // a.introduce();
 // // console.log(_.keys(a));
 // // const b = require("./b");
 // // b();
-// c();
+c();
 // eslint-disable-next-line no-console
 function ptest(){
   return new Promise((resolve, reject) => {
@@ -27,7 +27,7 @@ async function test(){
 // eslint-disable-next-line no-console
 console.log("i am backend,  head from me!ddd");
 // eslint-disable-next-line no-console
-console.log("dddddddddddddd", "dddddddddddd");
+console.log("ddddddddddddddddddsssssss", "ddddddddddddssss");
 const say = ()=>{
   // eslint-disable-next-line no-console
   console.log("to say");
