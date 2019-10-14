@@ -4,7 +4,8 @@
     {
       "targets":{
         "node": true
-      }
+      },
+      "useBuiltIns": "usage" 
     }]],
   "plugins": ["@babel/plugin-transform-runtime"]
 }
