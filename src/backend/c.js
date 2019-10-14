@@ -3,5 +3,5 @@ function introduce(){
   console.log("I am c");
 }
 const name =  "c";
-export default {name,introduce};
+export default introduce;
 

@@ -1,15 +1,15 @@
 
 module.exports = {
-  "root": true,
+  root: true,
   parser: 'babel-eslint',
-  "parserOptions": {
+  parserOptions: {
         "sourceType": "module"
   },
-  "env": {
-        "browser": true,
-        "node": true
+  env: {
+    browser: true,
+        node: true
     },
-    "rules": {
+    rules: {
         // "strict": 0,
         "indent": ["error", 2],
         "quotes": ["error", "double"],

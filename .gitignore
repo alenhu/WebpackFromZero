@@ -2,3 +2,7 @@
 package-lock.json
 
 node_modules/
+
+.buildjs/build/bundle.js
+
+.buildjs/build/bundle - 副本.js
