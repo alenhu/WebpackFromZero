@@ -10,7 +10,7 @@ module.exports = {
         path.join(backendPath,'index.js')
     ],
     output: {
-        path: path.resolve(__dirname, 'build'),
+        path: path.resolve(__dirname, 'backend'),
         filename: '[name].bundle.js'
     },
     mode: 'development',

@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-alert("i am index.js");
+import {keys} from "lodash";
+alert("i am index.js,on dev!!!");
 console.log([1,2,3].findIndex(x => x == 4));
 
 console.log("abc".padStart(10)); 
@@ -15,5 +16,6 @@ class Robot {
     alertMe(this.message);
   }
 }
-const marvin = new Robot("hello babel");
+const marvin = new Robot("hello babelssss");
 marvin.say();
+console.log(keys(marvin));

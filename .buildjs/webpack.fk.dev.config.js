@@ -1,22 +1,33 @@
 const path = require('path')
 const webpack = require('webpack')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const frontendPath = path.resolve(__dirname,'../src/frontend')
 console.log(path.resolve(__dirname, 'build'), frontendPath)
 console.log('path.resolve(src)', path.resolve('src'))
+const dist =  path.resolve(__dirname, 'app')
 const frontend = {
   entry: {
     index: path.join(frontendPath,'index.js'),
     second: path.join(frontendPath,'second.js')
   },
-  mode: "production",
+  mode: "development",
+  devtool: 'inline-source-map',
+  devServer: {
+  contentBase: dist,
+  hot: true,
+  },
   output: {
     // publicPath: "./",
-    path: path.resolve(__dirname, 'app'),
+    path: dist,
     filename: '[name].bundle.js'
   },
   plugins: [
+    new webpack.ProgressPlugin(),
+    new CleanWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
     // new HtmlWebpackPlugin({
     //   filename: "index.html",
     //   template: path.join(frontendPath,'index.html')})

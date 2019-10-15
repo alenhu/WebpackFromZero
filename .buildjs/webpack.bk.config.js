@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const backendPath = path.resolve(__dirname,'../src/backend')
 console.log(path.resolve(__dirname, 'build'), backendPath)
@@ -10,7 +11,7 @@ module.exports = {
         path.join(backendPath,'index.js')
     ],
     output: {
-        path: path.resolve(__dirname, 'build'),
+        path: path.resolve(__dirname, 'backend'),
         libraryTarget: "commonjs2",
         filename: '[name].bundle.js'
         // chunkFilename: '[id].[name].[chunkhash].js'
@@ -91,5 +92,7 @@ module.exports = {
   },
     plugins: [
         // 构建优化插件
+        new webpack.ProgressPlugin(),
+        new CleanWebpackPlugin(),
     ]
 }
