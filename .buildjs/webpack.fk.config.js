@@ -16,6 +16,56 @@ const frontend = {
     path: path.resolve(__dirname, 'app'),
     filename: '[name].bundle.js'
   },
+  module: {
+    rules: [
+      {
+        test: /\.(js)$/,
+        enforce: "pre",
+        exclude: /node_modules/,
+        // loader:"eslint-loader",
+        // include: [path.resolve('src\backend')],
+        use: [
+          {
+            loader: 'eslint-loader',
+            options: { // 这里的配置项参数将会被传递到 eslint 的 CLIEngine 
+              formatter: require('eslint-friendly-formatter') // 指定错误报告的格式规范
+            }
+          }
+        ],  
+    },
+    {
+      test: /\.m?js$/,
+      exclude: /(node_modules|bower_components)/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env']
+          ,
+          plugins: [
+            ["dynamic-import-node"]
+          ]
+        }
+      }
+    }
+
+  ]
+},
+optimization: {
+  minimizer: [
+    new UglifyJsPlugin({
+      test: /\.js(\?.*)?$/i,
+      uglifyOptions: {
+        output: {
+          comments: false,
+        },
+        warnings: false,
+        compress: {},
+        mangle: true
+      },
+      
+    }),
+  ]
+},
   plugins: [
     // new HtmlWebpackPlugin({
     //   filename: "index.html",

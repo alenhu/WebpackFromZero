@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import {keys} from "lodash";
+import {pick, keys} from "lodash";
 alert("i am index.js,on dev!!!");
 console.log([1,2,3].findIndex(x => x == 4));
 

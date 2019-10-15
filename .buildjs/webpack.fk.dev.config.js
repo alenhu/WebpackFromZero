@@ -23,6 +23,40 @@ const frontend = {
     path: dist,
     filename: '[name].bundle.js'
   },
+  module: {
+    rules: [
+      {
+        test: /\.(js)$/,
+        enforce: "pre",
+        exclude: /node_modules/,
+        // loader:"eslint-loader",
+        // include: [path.resolve('src\backend')],
+        use: [
+          {
+            loader: 'eslint-loader',
+            options: { // 这里的配置项参数将会被传递到 eslint 的 CLIEngine 
+              formatter: require('eslint-friendly-formatter') // 指定错误报告的格式规范
+            }
+          }
+        ],  
+    },
+    {
+      test: /\.m?js$/,
+      exclude: /(node_modules|bower_components)/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env']
+          ,
+          plugins: [
+            ["dynamic-import-node"]
+          ]
+        }
+      }
+    }
+
+  ]
+},
   plugins: [
     new webpack.ProgressPlugin(),
     new CleanWebpackPlugin(),
