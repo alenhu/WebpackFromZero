@@ -1,5 +1,5 @@
-function introduce(){
+function introduce () {
   // eslint-disable-next-line no-console
-  console.log("I am a");
+  console.log('I am a')
 }
-module.exports = {introduce};
+module.exports = { introduce }

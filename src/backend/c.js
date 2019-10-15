@@ -1,9 +1,7 @@
-import {pick,keys} from "lodash";
-
-function introduce(){
+// import { pick, keys } from 'lodash';
+const name = 'c'
+function introduce () {
   // eslint-disable-next-line no-console
-  console.log("I am c, use es6!!");
+  console.log('I am c, use es6!!', name)
 }
-const name =  "c";
-export default introduce;
-
+export default introduce
