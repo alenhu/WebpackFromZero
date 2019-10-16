@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const backendPath = path.resolve(__dirname,'../src/backend')
 console.log(path.resolve(__dirname, 'build'), backendPath)
 console.log('path.resolve(src)', path.resolve('src'))
@@ -94,5 +95,6 @@ module.exports = {
         // 构建优化插件
         new webpack.ProgressPlugin(),
         new CleanWebpackPlugin(),
+        new BundleAnalyzerPlugin({analyzerPort:8081})
     ]
 }

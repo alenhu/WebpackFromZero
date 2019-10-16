@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
-import { pick, keys } from 'lodash'
+import { keys } from 'lodash'
 alert('i am index.js,on dev!!!')
 console.log([1, 2, 3].findIndex(x => x === 4))
 
-console.log('abc'.padStart(10), pick)
+console.log('abc'.padStart(10))
 
 const alertMe = (msg) => {
   console.log(msg)

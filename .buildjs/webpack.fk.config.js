@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin'); 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const frontendPath = path.resolve(__dirname,'../src/frontend')
 console.log(path.resolve(__dirname, 'build'), frontendPath)
 console.log('path.resolve(src)', path.resolve('src'))
@@ -67,6 +68,7 @@ optimization: {
   ]
 },
   plugins: [
+    new BundleAnalyzerPlugin()
     // new HtmlWebpackPlugin({
     //   filename: "index.html",
     //   template: path.join(frontendPath,'index.html')})

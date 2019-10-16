@@ -3,7 +3,7 @@
 // import { rejects } from "assert";
 
 /* eslint-disable no-console */
-// import { pick, keys } from 'lodash'
+import { keys, pick } from 'lodash'
 // const _ = import(/* webpackChunkName: "my-chunk-name" */ "lodash");
 import c from './c'
 // // const a = require("./a");
@@ -28,7 +28,7 @@ async function test () {
 // eslint-disable-next-line no-console
 console.log('i am backend,  head from me!ddd')
 // eslint-disable-next-line no-console
-console.log('ddddddddddddddddddsssssss', 'ddddddddddddssss')
+console.log('ddddddddddddddddddsssssss', 'ddddddddddddssss', keys, pick)
 const say = () => {
   // eslint-disable-next-line no-console
   console.log('to say')
