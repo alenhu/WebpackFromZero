@@ -52,6 +52,17 @@ const frontend = {
   ]
 },
 optimization: {
+  splitChunks: {
+    cacheGroups: {
+      libs: {
+        name: 'chunk-libs',
+        test: /[\\/]node_modules[\\/]/,
+        priority: 10,
+        enforce: true,
+        chunks: 'all'
+      }
+  }
+},
   minimizer: [
     new UglifyJsPlugin({
       test: /\.js(\?.*)?$/i,
@@ -84,7 +95,7 @@ Object.keys(frontend.entry).forEach(key => {
       removeComments: true
     },
     inject: "head",
-    chunks: ['vendor', key, 'components'],
+    chunks: ['chunk-libs', key],
     nodeModules: process.env.NODE_ENV !== 'production'
       ? path.resolve(__dirname, '../node_modules')
       : false
@@ -92,3 +103,4 @@ Object.keys(frontend.entry).forEach(key => {
   frontend.plugins.push(plugin)
 })
 module.exports = frontend
+
