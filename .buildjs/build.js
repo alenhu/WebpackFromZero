@@ -101,24 +101,24 @@ if(args && args.length){
   server.listen(9080)
   }
 }else{
-    const webpackBKConfig = require('./webpack.bk.config')
-    webpack(webpackBKConfig,  (err, stats) => {
-        if (err) throw err
-        process.stdout.write(stats.toString({
-          colors: true,
-          modules: false,
-          children: false,
-          chunks: false,
-          chunkModules: false
-        }) + '\n\n')
+    // const webpackBKConfig = require('./webpack.bk.config')
+    // webpack(webpackBKConfig,  (err, stats) => {
+    //     if (err) throw err
+    //     process.stdout.write(stats.toString({
+    //       colors: true,
+    //       modules: false,
+    //       children: false,
+    //       chunks: false,
+    //       chunkModules: false
+    //     }) + '\n\n')
 
-        if (stats.hasErrors()) {
-          console.log(chalk.red('  Build failed with errors.\n'))
-          process.exit(1)
-        }
+    //     if (stats.hasErrors()) {
+    //       console.log(chalk.red('  Build failed with errors.\n'))
+    //       process.exit(1)
+    //     }
 
-        console.log(chalk.cyan('  Build complete.\n'))
-    })
+    //     console.log(chalk.cyan('  Build complete.\n'))
+    // })
     const webpackFKConfig = require('./webpack.fk.config')
     webpack(webpackFKConfig,  (err, stats) => {
       if (err) throw err

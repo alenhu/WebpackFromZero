@@ -3,6 +3,8 @@ const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+
 const frontendPath = path.resolve(__dirname,'../src/frontend')
 console.log(path.resolve(__dirname, 'build'), frontendPath)
 console.log('path.resolve(src)', path.resolve('src'))
@@ -18,6 +20,12 @@ const frontend = {
   contentBase: dist,
   hot: true,
   },
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+        vue: 'vue/dist/vue.runtime.esm.js',
+    },
+},
   output: {
     // publicPath: "./",
     path: dist,
@@ -26,7 +34,7 @@ const frontend = {
   module: {
     rules: [
       {
-        test: /\.(js)$/,
+        test: /\.(js|vue)$/,
         enforce: "pre",
         exclude: /node_modules/,
         // loader:"eslint-loader",
@@ -39,6 +47,10 @@ const frontend = {
             }
           }
         ],  
+    },
+    {
+      test: /\.vue$/,
+      loader: 'vue-loader'
     },
     {
       test: /\.m?js$/,
@@ -60,6 +72,7 @@ const frontend = {
   plugins: [
     new webpack.ProgressPlugin(),
     new CleanWebpackPlugin(),
+    new VueLoaderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
     // new HtmlWebpackPlugin({
@@ -76,7 +89,7 @@ Object.keys(frontend.entry).forEach(key => {
       removeAttributeQuotes: true,
       removeComments: true
     },
-    inject: "head",
+    // inject: "head",
     chunks: ['vendor', key, 'components'],
     nodeModules: process.env.NODE_ENV !== 'production'
       ? path.resolve(__dirname, '../node_modules')

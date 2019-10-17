@@ -29,6 +29,7 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+// eslint-disable-next-line no-new
 // new Vue({
 //   el: '#app',
 //   render: h => h(App)

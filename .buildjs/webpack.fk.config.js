@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin'); 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const frontendPath = path.resolve(__dirname,'../src/frontend')
 console.log(path.resolve(__dirname, 'build'), frontendPath)
@@ -12,6 +13,13 @@ const frontend = {
     second: path.join(frontendPath,'second.js')
   },
   mode: "production",
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+        //vue: 'vue/dist/vue.runtime.esm.js',
+        'vue': 'vue/dist/vue.js'
+    },
+},
   output: {
     // publicPath: "./",
     path: path.resolve(__dirname, 'app'),
@@ -20,7 +28,7 @@ const frontend = {
   module: {
     rules: [
       {
-        test: /\.(js)$/,
+        test: /\.(js|vue)$/,
         enforce: "pre",
         exclude: /node_modules/,
         // loader:"eslint-loader",
@@ -33,6 +41,10 @@ const frontend = {
             }
           }
         ],  
+    },
+    {
+      test: /\.vue$/,
+      loader: 'vue-loader'
     },
     {
       test: /\.m?js$/,
@@ -79,7 +91,8 @@ optimization: {
   ]
 },
   plugins: [
-    new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin()
+    new VueLoaderPlugin()
     // new HtmlWebpackPlugin({
     //   filename: "index.html",
     //   template: path.join(frontendPath,'index.html')})
@@ -94,7 +107,7 @@ Object.keys(frontend.entry).forEach(key => {
       removeAttributeQuotes: true,
       removeComments: true
     },
-    inject: "head",
+    // inject: "head",
     chunks: ['chunk-libs', key],
     nodeModules: process.env.NODE_ENV !== 'production'
       ? path.resolve(__dirname, '../node_modules')
