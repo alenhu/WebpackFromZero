@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); 
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
@@ -31,6 +32,9 @@ const frontend = {
     path: dist,
     filename: '[name].bundle.js'
   },
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: { vue: 'vue/dist/vue.esm.js' } },
   module: {
     rules: [
       {
@@ -52,6 +56,10 @@ const frontend = {
       test: /\.vue$/,
       loader: 'vue-loader'
     },
+     {
+    test: /\.css$/,
+    use: ['vue-style-loader', 'css-loader']
+  },
     {
       test: /\.m?js$/,
       exclude: /(node_modules|bower_components)/,
@@ -65,6 +73,14 @@ const frontend = {
           ]
         }
       }
+    },
+    {
+      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+      loader: 'url-loader',
+      options: {
+        limit: 10000,
+        name: 'fonts/[name].[hash:7].[ext]'
+      }
     }
 
   ]
@@ -74,10 +90,8 @@ const frontend = {
     new CleanWebpackPlugin(),
     new VueLoaderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
-    // new HtmlWebpackPlugin({
-    //   filename: "index.html",
-    //   template: path.join(frontendPath,'index.html')})
+    new webpack.NoEmitOnErrorsPlugin(),
+    new VueLoaderPlugin()
   ]
 }
 Object.keys(frontend.entry).forEach(key => {

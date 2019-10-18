@@ -21,12 +21,17 @@ const frontend = {
     },
 },
   output: {
-    // publicPath: "./",
+    // publicPath: "/",
     path: path.resolve(__dirname, 'app'),
     filename: '[name].bundle.js'
   },
+  resolve: { extensions: ['.js', '.vue', '.json'],
+  alias: {
+    'vue$': 'vue/dist/vue.esm.js',
+  }},
   module: {
     rules: [
+      
       {
         test: /\.(js|vue)$/,
         enforce: "pre",
@@ -45,7 +50,25 @@ const frontend = {
     {
       test: /\.vue$/,
       loader: 'vue-loader'
-    },
+      // options: {
+      //     loaders: {
+      //         'scss': [
+      //             'vue-style-loader',
+      //             'css-loader',
+      //             'sass-loader'
+      //         ],
+      //         'sass': [
+      //             'vue-style-loader',
+      //             'css-loader',
+      //             'sass-loader?indentedSyntax'
+      //         ]
+      //     }
+      // }
+  },
+  {
+    test: /\.css$/,
+    use: ['vue-style-loader', 'css-loader']
+  },
     {
       test: /\.m?js$/,
       exclude: /(node_modules|bower_components)/,
@@ -59,11 +82,22 @@ const frontend = {
           ]
         }
       }
+    },
+    {
+      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+      loader: 'url-loader',
+      options: {
+        limit: 10000,
+        name: 'fonts/[name].[hash:7].[ext]'
+      }
     }
 
   ]
 },
 optimization: {
+  runtimeChunk: {
+    name: "manifest"
+  },
   splitChunks: {
     cacheGroups: {
       libs: {
@@ -91,7 +125,7 @@ optimization: {
   ]
 },
   plugins: [
-    // new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin(),
     new VueLoaderPlugin()
     // new HtmlWebpackPlugin({
     //   filename: "index.html",
@@ -108,7 +142,7 @@ Object.keys(frontend.entry).forEach(key => {
       removeComments: true
     },
     // inject: "head",
-    chunks: ['chunk-libs', key],
+    chunks: ['manifest','chunk-libs', key],
     nodeModules: process.env.NODE_ENV !== 'production'
       ? path.resolve(__dirname, '../node_modules')
       : false
