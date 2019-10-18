@@ -10,7 +10,6 @@
   <el-button type="danger">危险按钮</el-button>
 </el-row>
   </div>
-  
 </template>
 <script>
 console.log('vue 1st!')

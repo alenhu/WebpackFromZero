@@ -15,13 +15,13 @@ module.exports = {
   // required to lint *.vue files
   plugins: [
     'vue',
-    [
-        "component",
-        {
-          "libraryName": "element-ui",
-          "styleLibraryName": "theme-chalk"
-        }
-      ]
+    // [
+    //     "component",
+    //     {
+    //       "libraryName": "element-ui",
+    //       "styleLibraryName": "theme-chalk"
+    //     }
+    //   ]
   ],
   env: {
     browser: true,

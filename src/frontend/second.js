@@ -1,9 +1,9 @@
 import Vue from 'vue'
 
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import App from './main.vue'
-Vue.use(ElementUI);
+Vue.use(ElementUI)
 // alert('i am index.js,on dev!!!')
 // console.log([1, 2, 3].findIndex(x => x === 4))
 

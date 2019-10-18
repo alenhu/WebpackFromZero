@@ -1,11 +1,13 @@
 /* eslint-disable no-console */
 // import { keys } from 'lodash'
 import Vue from 'vue'
-import 'element-ui/lib/theme-chalk/index.css';
-import { Button, Select } from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css'
+import { Button, Select, Row } from 'element-ui'
 import App from './main.vue'
-Vue.component(Button.name, Button);
-Vue.component(Select.name, Select);
+Vue.component(Button.name, Button)
+Vue.component(Select.name, Select)
+Vue.component(Row.name, Row)
+
 /* 或写为
  * Vue.use(Button)
  * Vue.use(Select)
