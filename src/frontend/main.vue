@@ -7,13 +7,13 @@
 console.log('vue 1st!')
 export default {
   name: 'App',
-  data (){
+  data () {
     return {
       content: 'I am vue!!!'
     }
   },
-  mounted() {
+  mounted () {
     console.log('mouted')
-  },
+  }
 }
 </script>

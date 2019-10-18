@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin'); 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const frontendPath = path.resolve(__dirname,'../src/frontend')
 console.log(path.resolve(__dirname, 'build'), frontendPath)
@@ -13,14 +14,19 @@ const frontend = {
   },
   mode: "production",
   output: {
-    // publicPath: "./",
+    // publicPath: "/",
     path: path.resolve(__dirname, 'app'),
     filename: '[name].bundle.js'
   },
+  resolve: { extensions: ['.js', '.vue', '.json'],
+  alias: {
+    'vue$': 'vue/dist/vue.esm.js',
+  }},
   module: {
     rules: [
+      
       {
-        test: /\.(js)$/,
+        test: /\.(js|vue)$/,
         enforce: "pre",
         exclude: /node_modules/,
         // loader:"eslint-loader",
@@ -34,6 +40,24 @@ const frontend = {
           }
         ],  
     },
+    {
+      test: /\.vue$/,
+      loader: 'vue-loader'
+      // options: {
+      //     loaders: {
+      //         'scss': [
+      //             'vue-style-loader',
+      //             'css-loader',
+      //             'sass-loader'
+      //         ],
+      //         'sass': [
+      //             'vue-style-loader',
+      //             'css-loader',
+      //             'sass-loader?indentedSyntax'
+      //         ]
+      //     }
+      // }
+  },
     {
       test: /\.m?js$/,
       exclude: /(node_modules|bower_components)/,
@@ -52,6 +76,9 @@ const frontend = {
   ]
 },
 optimization: {
+  runtimeChunk: {
+    name: "manifest"
+  },
   splitChunks: {
     cacheGroups: {
       libs: {
@@ -79,7 +106,8 @@ optimization: {
   ]
 },
   plugins: [
-    new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin(),
+    new VueLoaderPlugin()
     // new HtmlWebpackPlugin({
     //   filename: "index.html",
     //   template: path.join(frontendPath,'index.html')})
@@ -94,8 +122,8 @@ Object.keys(frontend.entry).forEach(key => {
       removeAttributeQuotes: true,
       removeComments: true
     },
-    inject: "head",
-    chunks: ['chunk-libs', key],
+    // inject: "head",
+    chunks: ['manifest','chunk-libs', key],
     nodeModules: process.env.NODE_ENV !== 'production'
       ? path.resolve(__dirname, '../node_modules')
       : false
