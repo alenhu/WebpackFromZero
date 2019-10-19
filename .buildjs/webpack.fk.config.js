@@ -3,13 +3,14 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin'); 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const frontendPath = path.resolve(__dirname,'../src/frontend')
 console.log(path.resolve(__dirname, 'build'), frontendPath)
 console.log('path.resolve(src)', path.resolve('src'))
 const frontend = {
   entry: {
-    index: path.join(frontendPath,'index.js'),
+    first: path.join(frontendPath,'index.js'),
     second: path.join(frontendPath,'second.js')
   },
   mode: "production",
@@ -23,7 +24,7 @@ const frontend = {
   output: {
     // publicPath: "/",
     path: path.resolve(__dirname, 'app'),
-    filename: '[name].bundle.js'
+    filename: '[name]/[name].bundle.js'
   },
   resolve: { extensions: ['.js', '.vue', '.json'],
   alias: {
@@ -67,7 +68,17 @@ const frontend = {
   },
   {
     test: /\.css$/,
-    use: ['vue-style-loader', 'css-loader']
+    use: ['vue-style-loader',
+    {
+      loader: MiniCssExtractPlugin.loader,
+      options: {
+        // you can specify a publicPath here
+        // by default it uses publicPath in webpackOptions.output
+        publicPath: '../',
+        hmr: process.env.NODE_ENV === 'development',
+      },
+    }, 
+    'css-loader']
   },
     {
       test: /\.m?js$/,
@@ -125,8 +136,14 @@ optimization: {
   ]
 },
   plugins: [
-    // new BundleAnalyzerPlugin(),
-    new VueLoaderPlugin()
+    new BundleAnalyzerPlugin(),
+    new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name]/[name].css',
+      chunkFilename: 'css/[id].css',
+    }),
     // new HtmlWebpackPlugin({
     //   filename: "index.html",
     //   template: path.join(frontendPath,'index.html')})
@@ -134,7 +151,7 @@ optimization: {
 }
 Object.keys(frontend.entry).forEach(key => {
   const plugin = new HtmlWebpackPlugin({
-    filename: key + '.html',
+    filename: key + '/index.html',
     template:  path.join(frontendPath,`${key}.html`),
     minify: {
       collapseWhitespace: true,
