@@ -12,7 +12,7 @@ module.exports = {
     rules: {
         // "strict": 0,
         "indent": ["error", 2],
-        "quotes": ["error", "double"],
+        "quotes": ["error", "single"],
         "semi": ["error", "always"],
         "no-console": "error",
         "arrow-parens": 0

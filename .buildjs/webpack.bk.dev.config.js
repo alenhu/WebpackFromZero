@@ -30,7 +30,18 @@ module.exports = {
         'src': path.resolve(__dirname, './src')
       }
     },
-
+    target: 'node',
+    node: {
+      console: 'mock',
+      global: true,
+      process: true,
+      __filename: 'mock',
+      __dirname: 'mock',
+      Buffer: true,
+      setImmediate: true
+  
+      // See "Other node core libraries" for additional options.
+    },
     module: {
       rules: [
         {

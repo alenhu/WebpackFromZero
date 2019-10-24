@@ -28,6 +28,7 @@ module.exports = {
         'src': path.resolve(__dirname, './src')
       }
     },
+    target: 'node',
     node: {
       console: 'mock',
       global: true,
